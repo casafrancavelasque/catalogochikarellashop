@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Chikarella — Moda Femenina Premium desde Gamarra, Lima. Blusas, vestidos, conjuntos y más.">
+<meta name="theme-color" content="#0a0a0a">
+<title>Chikarella — Moda Femenina Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- FLOATING WA -->
+<button id="wa-float" onclick="openWA()" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<!-- SOCIAL PROOF TICKER -->
+<div id="social-ticker" class="social-ticker">
+  <div class="ticker-inner" id="ticker-inner"></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo" id="nav-brand-name">Chikarella</a>
+  <div class="nav-links" id="nav-links">
+    <a href="#coleccion">Colección</a>
+    <a href="#sobre">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-may-nav" onclick="openMayModal()" id="may-nav-btn">🔑 Mayorista</button>
+    <button class="btn-wa-nav" onclick="openWA()">WhatsApp</button>
+    <button class="btn-adm" onclick="showLogin()" title="Admin Panel">⚙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow" id="h-eyebrow">Nueva Colección 2025</div>
+    <h1 class="hero-h1" id="h-title">La moda que<br>te hace <em>brillar</em></h1>
+    <p class="hero-sub" id="h-sub">Prendas exclusivas para la mujer moderna. Calidad premium directo desde Gamarra, Lima.</p>
+    <div class="hero-btns">
+      <button class="btn-ver" onclick="scrollTo('coleccion')">Ver Colección</button>
+      <button class="btn-may-hero" onclick="openMayModal()">Acceso Mayorista</button>
+    </div>
+    <!-- SOCIAL PROOF BADGES -->
+    <div class="proof-badges" id="proof-badges">
+      <div class="proof-badge"><span id="views-count">0</span> visualizaciones</div>
+      <div class="proof-badge"><span id="buys-count">0</span> compras hoy</div>
+      <div class="proof-badge live-badge">🔴 En vivo TikTok</div>
+    </div>
+  </div>
+  <div class="hero-right" id="hero-imgs"></div>
+</section>
+
+<!-- MAYORISTA MODE BAR -->
+<div id="may-bar" class="may-bar hidden">
+  <span>✓ <strong>Modo Mayorista Activo</strong> — Precios especiales visibles</span>
+  <button onclick="logoutMay()">Salir</button>
+</div>
+
+<!-- COLLECTION HEADER -->
+<section id="coleccion" class="col-header">
+  <div class="col-eyebrow" id="col-eyebrow-txt">Chikarella · Catálogo</div>
+  <h2 class="col-h2">Nuestra Colección</h2>
+  <p class="col-sub">Toca cualquier prenda para ver detalles y comprar por WhatsApp.</p>
+</section>
+
+<!-- PRODUCTS GRID -->
+<div id="products-grid"></div>
+
+<!-- SOBRE NOSOTROS -->
+<section id="sobre" class="sobre-sec">
+  <div class="sobre-inner">
+    <div class="sobre-imgs" id="sobre-imgs"></div>
+    <div class="sobre-text">
+      <div class="col-eyebrow">Nuestra Historia</div>
+      <h2 class="sec-h2">Sobre<br><em>Chikarella</em></h2>
+      <p>Chikarella nació en el corazón de <strong>Gamarra</strong>, el emporio textil más grande de América Latina, con una misión clara: llevar moda femenina de alta calidad a precios justos.</p>
+      <p>Somos una marca peruana con alma boutique, especializada en confección de prendas para la <strong>mujer moderna</strong> que busca estilo, comodidad y distinción en su día a día.</p>
+      <p>Cada prenda es cuidadosamente diseñada y producida en Lima, combinando <strong>tendencias internacionales</strong> con la destreza artesanal de Gamarra.</p>
+      <p>Hoy contamos con dos tiendas físicas y un catálogo digital que llega a clientas en todo el Perú a través de <strong>WhatsApp, TikTok e Instagram</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="serv-sec">
+  <div class="sec-center">
+    <div class="col-eyebrow">Lo que hacemos</div>
+    <h2 class="sec-h2">Nuestros Servicios</h2>
+    <p class="col-sub">Más allá del retail — también producimos para otras marcas.</p>
+  </div>
+  <div class="serv-grid">
+    <div class="serv-card"><div class="serv-icon">👗</div><div class="serv-title">Confección Marca Propia</div><div class="serv-desc">Producimos con tu etiqueta. Ideal para emprendedores que quieren lanzar su marca.</div></div>
+    <div class="serv-card"><div class="serv-icon">🧵</div><div class="serv-title">Fabricación a Pedido</div><div class="serv-desc">Desde una docena de prendas. Elige modelo, tela, colores y tallas.</div></div>
+    <div class="serv-card"><div class="serv-icon">📦</div><div class="serv-title">Venta Mayorista</div><div class="serv-desc">Precios especiales para distribuidoras, revendedoras y tiendas minoristas.</div></div>
+    <div class="serv-card"><div class="serv-icon">🚚</div><div class="serv-title">Envíos a Todo el Perú</div><div class="serv-desc">Olva Courier, Shalom, J&T Express. Coordinamos el envío a tu puerta.</div></div>
+    <div class="serv-card"><div class="serv-icon">🎨</div><div class="serv-title">Diseño de Prendas</div><div class="serv-desc">¿Tienes una idea? La convertimos en realidad. Asesoría en diseño y patronaje.</div></div>
+    <div class="serv-card"><div class="serv-icon">🎵</div><div class="serv-title">TikTok Live</div><div class="serv-desc">Síguenos para ofertas exclusivas en vivo, previas de colección y precios especiales.</div></div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="cont-sec">
+  <div class="sec-center">
+    <div class="col-eyebrow">Encuéntranos</div>
+    <h2 class="sec-h2">Contacto</h2>
+  </div>
+  <div class="cont-grid">
+    <div>
+      <div class="cont-item"><div class="ci-icon">📞</div><div class="ci-text"><strong id="ct-phone">+51 999 999 999</strong><br><span style="font-size:.78rem;color:var(--muted)">WhatsApp disponible</span></div></div>
+      <div class="cont-item"><div class="ci-icon">📧</div><div class="ci-text" id="ct-email">chikarella@gmail.com</div></div>
+      <div class="cont-item"><div class="ci-icon">🕐</div><div class="ci-text"><strong>Horario</strong><br>Lun – Sáb: 9:00 AM – 7:00 PM</div></div>
+      <div class="cont-item"><div class="ci-icon">🚚</div><div class="ci-text"><strong>Envíos</strong><br>Olva Courier · Shalom · J&T Express · Todo el Perú</div></div>
+      <div class="tiendas-grid">
+        <div class="tienda-card"><div class="tienda-lbl">Tienda 1</div><div class="tienda-addr">Jirón Gamarra 1159<br>Galería Augusto Allca<br><strong>Tienda 172</strong></div></div>
+        <div class="tienda-card"><div class="tienda-lbl">Tienda 2</div><div class="tienda-addr">Damero · Sótano 2<br><strong>Tienda 009</strong></div></div>
+      </div>
+      <div class="socials-row" id="socials-row"></div>
+    </div>
+    <div class="cont-wa-side">
+      <h3>Escríbenos ahora</h3>
+      <p>La forma más rápida de consultar precios y hacer tu pedido. Respondemos en minutos.</p>
+      <button onclick="openWA()" class="btn-wa-big">💬 Abrir WhatsApp</button>
+      <div class="tiktok-box">
+        <div class="tiktok-label">TikTok Live 🎵</div>
+        <p>Síguenos para ofertas exclusivas en vivo y previas de colección.</p>
+        <a href="#" id="tiktok-link" target="_blank" class="btn-tiktok">Seguirnos en TikTok</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-logo" id="footer-brand">Chikarella</div>
+  <div class="footer-copy">© 2025 Chikarella — Moda Femenina Premium · Gamarra, Lima, Perú</div>
+</footer>
+
+<!-- PRODUCT MODAL -->
+<div id="pmodal" class="overlay" onclick="if(event.target===this)closePModal()">
+  <div class="pmodal-box">
+    <button class="overlay-close" onclick="closePModal()">✕</button>
+    <div class="pmodal-grid">
+      <div class="pmodal-img-side">
+        <img id="pm-img" src="" alt="" loading="eager">
+      </div>
+      <div class="pmodal-info">
+        <div class="pm-brand">CHIKARELLA</div>
+        <h2 class="pm-name" id="pm-name"></h2>
+        <div class="pm-code" id="pm-code"></div>
+        <p class="pm-desc" id="pm-desc"></p>
+        <table class="pm-prices" id="pm-prices"></table>
+        <div class="pm-stock-row" id="pm-stock-row"></div>
+        <button class="btn-wa-modal" id="pm-wa-btn">💬 Comprar por WhatsApp</button>
+        <button class="btn-share-modal" onclick="shareProduct()">↗ Compartir Producto</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAYORISTA MODAL -->
+<div id="may-modal" class="overlay" onclick="if(event.target===this)closeMayModal()">
+  <div class="may-box">
+    <h2>Acceso Mayorista</h2>
+    <p>Ingresa tu clave para ver los 3 precios y descargar catálogos PDF exclusivos.</p>
+    <div class="may-err hidden" id="may-err">Clave incorrecta. Intenta nuevamente.</div>
+    <input class="may-input" type="password" id="may-pass" placeholder="Clave mayorista" onkeydown="if(event.key==='Enter')doMayLogin()">
+    <button class="btn-may-enter" onclick="doMayLogin()">Ingresar</button>
+    <button class="btn-may-cancel" onclick="closeMayModal()">Cancelar</button>
+  </div>
+</div>
+
+<!-- ADMIN OVERLAY -->
+<div id="admin-overlay" class="admin-overlay">
+  <div class="adm-topbar">
+    <div class="adm-logo">⚙ Admin · <span id="adm-brand-name">Chikarella</span></div>
+    <div class="adm-tabs" id="adm-tabs">
+      <button class="adm-tab active" data-sec="prods">Productos</button>
+      <button class="adm-tab" data-sec="add">+ Agregar</button>
+      <button class="adm-tab" data-sec="banner">Banner</button>
+      <button class="adm-tab" data-sec="config">Config</button>
+      <button class="adm-tab" data-sec="pdf">PDF</button>
+      <button class="adm-tab" data-sec="analytics">Analytics</button>
+      <button class="adm-tab" data-sec="export" style="color:#c8a96e">⬆ Publicar</button>
+    </div>
+    <button class="adm-close" onclick="closeAdm()">✕ Cerrar</button>
+  </div>
+  <div class="adm-body">
+
+    <!-- PRODUCTS LIST -->
+    <div class="adm-sec active" id="sec-prods">
+      <div class="adm-sec-header">
+        <span class="adm-sec-title">Gestión de Productos</span>
+        <button class="btn-s" onclick="admSec('add');clearForm()">+ Nuevo Producto</button>
+      </div>
+      <div class="adm-pgrid" id="adm-pgrid"></div>
+    </div>
+
+    <!-- ADD/EDIT -->
+    <div class="adm-sec" id="sec-add">
+      <div class="adm-sec-header"><span class="adm-sec-title" id="form-h">Agregar Producto</span></div>
+      <input type="hidden" id="eid">
+      <div class="fg2">
+        <div class="fg"><label class="flbl">Nombre del Producto</label><input class="fi" type="text" id="fn" placeholder="Ej: Blusa Romántica Floral"></div>
+        <div class="fg"><label class="flbl">Código</label><input class="fi" type="text" id="fc" placeholder="Ej: CHK-001"></div>
+        <div class="fg"><label class="flbl">Etiqueta</label>
+          <select class="fi" id="ftag">
+            <option value="">Sin etiqueta</option>
+            <option value="trend">Tendencia</option>
+            <option value="new">Nuevo</option>
+            <option value="sale">Oferta</option>
+          </select>
+        </div>
+        <div class="fg"><label class="flbl">Stock</label>
+          <select class="fi" id="fstock">
+            <option value="ok">Disponible</option>
+            <option value="low">Poco stock</option>
+            <option value="out">Agotado</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label class="flbl">Descripción (tallas, material, colores disponibles)</label>
+        <textarea class="fi" id="fdesc" rows="3" placeholder="Telas, tallas disponibles, colores..."></textarea>
+      </div>
+      <div class="fg"><label class="flbl">Precios (S/)</label>
+        <div class="fg3">
+          <div><label class="flbl">Precio Unidad</label><input class="fi" type="number" id="fp1" placeholder="0.00" step="0.01"></div>
+          <div><label class="flbl">Precio Mayorista</label><input class="fi" type="number" id="fp2" placeholder="0.00" step="0.01"></div>
+          <div><label class="flbl">Precio Docena</label><input class="fi" type="number" id="fp3" placeholder="0.00" step="0.01"></div>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flbl">Imágenes del Producto (máximo 2 — la 1ra es principal, la 2da es vista alternativa)</label>
+        <div class="prod-imgs-grid">
+          <div class="prod-img-slot" id="slot0">
+            <div class="prod-img-slot-inner" onclick="document.getElementById('fimg0').click()">
+              <div class="upload-icon">📷</div>
+              <div style="font-size:.75rem">Foto Principal</div>
+              <div class="upload-hint">Recomendado 600×800px</div>
+            </div>
+            <img id="fimg0-prev" class="prod-img-slot-preview hidden">
+            <div class="prod-img-slot-btns hidden" id="slot0-btns">
+              <button type="button" onclick="document.getElementById('fimg0').click()">📷 Cambiar</button>
+              <button type="button" onclick="clearProdImg(0)">✕ Quitar</button>
+            </div>
+          </div>
+          <div class="prod-img-slot" id="slot1">
+            <div class="prod-img-slot-inner" onclick="document.getElementById('fimg1').click()">
+              <div class="upload-icon">➕</div>
+              <div style="font-size:.75rem">Foto 2 (opcional)</div>
+              <div class="upload-hint">Vista alternativa</div>
+            </div>
+            <img id="fimg1-prev" class="prod-img-slot-preview hidden">
+            <div class="prod-img-slot-btns hidden" id="slot1-btns">
+              <button type="button" onclick="document.getElementById('fimg1').click()">📷 Cambiar</button>
+              <button type="button" onclick="clearProdImg(1)">✕ Quitar</button>
+            </div>
+          </div>
+        </div>
+        <input type="file" id="fimg0" accept="image/*" style="display:none" onchange="prevProdImg(0,event)">
+        <input type="file" id="fimg1" accept="image/*" style="display:none" onchange="prevProdImg(1,event)">
+        <input type="hidden" id="fimgdata">
+        <input type="hidden" id="fimgdata2">
+      </div>
+      <div class="form-actions">
+        <button class="btn-s" onclick="saveProd()">Guardar Producto</button>
+        <button class="btn-ghost" onclick="clearForm()">Limpiar</button>
+        <button class="btn-ghost" onclick="admSec('prods')">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- BANNER CONFIG -->
+    <div class="adm-sec" id="sec-banner">
+      <div class="adm-sec-header"><span class="adm-sec-title">Editar Banner Principal</span></div>
+      <div class="fg2">
+        <div class="fg"><label class="flbl">Texto pequeño superior (eyebrow)</label><input class="fi" type="text" id="b-ey" placeholder="Nueva Colección 2025"></div>
+        <div class="fg"><label class="flbl">Título principal</label><input class="fi" type="text" id="b-ti" placeholder="La moda que te hace brillar"></div>
+      </div>
+      <div class="fg"><label class="flbl">Subtítulo</label><textarea class="fi" id="b-su" rows="2" placeholder="Descripción..."></textarea></div>
+      <div class="fg">
+        <label class="flbl">Imágenes del Hero (4 fotos — solo modelos, sin texto encima)</label>
+        <div class="hero-img-grid" id="hero-img-grid">
+          <div class="hero-img-cell" id="hc0">
+            <span class="hc-add" onclick="document.getElementById('hi0').click()">+ Foto 1</span>
+            <img id="hc0-img" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <button class="hc-del" id="hc0-del" onclick="clearHeroImg(0)" style="display:none" title="Eliminar">✕</button>
+            <div class="hc-change" id="hc0-chg" onclick="document.getElementById('hi0').click()" style="display:none">📷 Cambiar</div>
+          </div>
+          <div class="hero-img-cell" id="hc1">
+            <span class="hc-add" onclick="document.getElementById('hi1').click()">+ Foto 2</span>
+            <img id="hc1-img" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <button class="hc-del" id="hc1-del" onclick="clearHeroImg(1)" style="display:none" title="Eliminar">✕</button>
+            <div class="hc-change" id="hc1-chg" onclick="document.getElementById('hi1').click()" style="display:none">📷 Cambiar</div>
+          </div>
+          <div class="hero-img-cell" id="hc2">
+            <span class="hc-add" onclick="document.getElementById('hi2').click()">+ Foto 3</span>
+            <img id="hc2-img" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <button class="hc-del" id="hc2-del" onclick="clearHeroImg(2)" style="display:none" title="Eliminar">✕</button>
+            <div class="hc-change" id="hc2-chg" onclick="document.getElementById('hi2').click()" style="display:none">📷 Cambiar</div>
+          </div>
+          <div class="hero-img-cell" id="hc3">
+            <span class="hc-add" onclick="document.getElementById('hi3').click()">+ Foto 4</span>
+            <img id="hc3-img" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <button class="hc-del" id="hc3-del" onclick="clearHeroImg(3)" style="display:none" title="Eliminar">✕</button>
+            <div class="hc-change" id="hc3-chg" onclick="document.getElementById('hi3').click()" style="display:none">📷 Cambiar</div>
+          </div>
+        </div>
+        <input type="file" id="hi0" accept="image/*" style="display:none" onchange="setHeroImg(0,event)">
+        <input type="file" id="hi1" accept="image/*" style="display:none" onchange="setHeroImg(1,event)">
+        <input type="file" id="hi2" accept="image/*" style="display:none" onchange="setHeroImg(2,event)">
+        <input type="file" id="hi3" accept="image/*" style="display:none" onchange="setHeroImg(3,event)">
+      </div>
+      <button class="btn-s" onclick="saveBanner()">Guardar Banner</button>
+    </div>
+
+    <!-- CONFIG -->
+    <div class="adm-sec" id="sec-config">
+      <div class="adm-sec-header"><span class="adm-sec-title">Configuración General</span></div>
+      <div class="config-hint">Todos los datos se guardan localmente. Para GitHub Pages, también actualiza <code>data/config.json</code>.</div>
+      <div class="fg2">
+        <div class="fg"><label class="flbl">Nombre de la Marca</label><input class="fi" type="text" id="cf-brand" placeholder="Chikarella"></div>
+        <div class="fg"><label class="flbl">Eslogan / Tagline</label><input class="fi" type="text" id="cf-tag" placeholder="Moda Femenina Premium"></div>
+        <div class="fg"><label class="flbl">WhatsApp (solo números con código país)</label><input class="fi" type="text" id="cf-wa" placeholder="51999999999"></div>
+        <div class="fg"><label class="flbl">Teléfono visible</label><input class="fi" type="text" id="cf-phone" placeholder="+51 999 999 999"></div>
+        <div class="fg"><label class="flbl">Email</label><input class="fi" type="text" id="cf-email" placeholder="chikarella@gmail.com"></div>
+        <div class="fg"><label class="flbl">Clave Mayorista</label><input class="fi" type="text" id="cf-maypass" placeholder="clave mayorista"></div>
+      </div>
+      <div class="fg-sep">Redes Sociales</div>
+      <div class="fg2">
+        <div class="fg"><label class="flbl">TikTok URL</label><input class="fi" type="text" id="cf-tiktok" placeholder="https://tiktok.com/@chikarella"></div>
+        <div class="fg"><label class="flbl">Instagram URL</label><input class="fi" type="text" id="cf-ig" placeholder="https://instagram.com/chikarella"></div>
+        <div class="fg"><label class="flbl">Facebook URL</label><input class="fi" type="text" id="cf-fb" placeholder="https://facebook.com/chikarella"></div>
+        <div class="fg"><label class="flbl">Nueva Contraseña Admin</label><input class="fi" type="text" id="cf-admp" placeholder="dejar vacío = no cambiar"></div>
+      </div>
+      <button class="btn-s" onclick="saveConfig()">Guardar Configuración</button>
+
+      <div class="fg-sep" style="margin-top:28px">☁️ OneDrive como Base de Datos (Opcional)</div>
+      <div class="onedrive-info">
+        <p>Guarda tus productos en un archivo JSON en OneDrive y todos los cambios se verán en cualquier dispositivo sin tocar GitHub.</p>
+        <div class="onedrive-steps">
+          <div class="od-step">
+            <strong>Paso 1:</strong> En OneDrive, crea un archivo <code>products.json</code> → clic derecho → <em>Compartir</em> → <em>Cualquier persona con el enlace puede ver</em> → copia el enlace
+          </div>
+          <div class="od-step">
+            <strong>Paso 2:</strong> Convierte el enlace a enlace directo:<br>
+            Cambia <code>1drv.ms/u/s!...</code> por <code>api.onedrive.com/v1.0/shares/...</code><br>
+            O usa el generador automático de abajo:
+          </div>
+        </div>
+        <div class="fg" style="margin-top:12px">
+          <label class="flbl">URL pública de OneDrive (enlace compartido)</label>
+          <input class="fi" type="text" id="cf-onedrive" placeholder="https://onedrive.live.com/...">
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <button class="btn-s" onclick="saveOnedriveUrl()">Activar OneDrive</button>
+          <button class="btn-ghost" onclick="testOnedrive()">Probar Conexión</button>
+          <button class="btn-ghost" onclick="disableOnedrive()">Desactivar</button>
+        </div>
+        <div id="od-status" style="margin-top:10px;font-size:.78rem"></div>
+      </div>
+    </div>
+
+    <!-- PDF -->
+    <div class="adm-sec" id="sec-pdf">
+      <div class="adm-sec-header"><span class="adm-sec-title">Catálogo PDF</span></div>
+      <div class="pdf-btns">
+        <button class="btn-pdf" onclick="genPDF(false)">📄 Catálogo Público</button>
+        <button class="btn-pdf" onclick="genPDF(true)">📄 Catálogo Mayorista (3 precios)</button>
+      </div>
+      <div class="pdf-info">El PDF incluye: portada elegante · fotos grandes · nombre · código · precios · datos de contacto · listo para WhatsApp, TikTok e Instagram.</div>
+    </div>
+
+    <!-- EXPORT / PUBLICAR -->
+    <div class="adm-sec" id="sec-export">
+      <div class="adm-sec-header"><span class="adm-sec-title">⬆ Publicar Cambios en GitHub</span></div>
+      <div class="export-alert">
+        <div class="export-alert-icon">💡</div>
+        <div><strong>¿Por qué debo hacer esto?</strong><br>
+        Cuando editas productos o config desde el admin, los cambios se guardan solo en <em>tu navegador</em>. Para que todos los clientes vean los cambios, debes actualizar los archivos en GitHub con estos pasos.</div>
+      </div>
+      <div class="export-steps">
+        <div class="export-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Descarga los archivos actualizados</div>
+            <div class="step-desc">Haz click en cada botón para descargar con todos tus cambios.</div>
+            <div class="export-btns">
+              <button class="btn-export" onclick="downloadExport('products')">⬇ Descargar products.json</button>
+              <button class="btn-export" onclick="downloadExport('config')">⬇ Descargar config.json</button>
+            </div>
+          </div>
+        </div>
+        <div class="export-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Abre tu repositorio en GitHub</div>
+            <div class="step-desc">Ve a <strong>github.com</strong> → tu repositorio → carpeta <code>data/</code></div>
+          </div>
+        </div>
+        <div class="export-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Reemplaza cada archivo</div>
+            <div class="step-desc">
+              Click en <code>products.json</code> → ícono lápiz ✏️ → selecciona todo (Ctrl+A) → borra → pega el contenido descargado → <strong>Commit changes</strong>. Repite para <code>config.json</code>.
+            </div>
+          </div>
+        </div>
+        <div class="export-step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Espera 1-2 min y recarga</div>
+            <div class="step-desc">GitHub Pages actualiza solo. Todos los clientes verán los cambios.</div>
+          </div>
+        </div>
+      </div>
+      <div class="export-tip">
+        <strong>⚡ Alternativa rápida:</strong> Copia el JSON directo y pégalo en GitHub sin descargar.
+        <div style="margin-top:10px"><button class="btn-ghost" onclick="exportForGitHub()">📋 Ver / Copiar JSON</button></div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="adm-sec" id="sec-analytics">
+      <div class="adm-sec-header"><span class="adm-sec-title">Analytics del Catálogo</span></div>
+      <div class="stats-grid" id="stats-grid"></div>
+      <div class="stats-sub" id="stats-sub"></div>
+      <div class="stats-products" id="stats-products"></div>
+      <div style="margin-top:20px">
+        <button class="btn-ghost" onclick="if(confirm('¿Reiniciar estadísticas?'))resetAnalytics()">Reiniciar estadísticas</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EXPORT JSON OVERLAY -->
+<div id="export-overlay" class="overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="export-box">
+    <button class="overlay-close" onclick="document.getElementById('export-overlay').classList.remove('open')">✕</button>
+    <h2 class="export-box-title">Copiar JSON para GitHub</h2>
+    <div class="export-json-block">
+      <div class="export-json-header">
+        <span>📄 data/products.json</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn-copy-json" onclick="copyExport('products')">Copiar</button>
+          <button class="btn-copy-json" onclick="downloadExport('products')">⬇ Descargar</button>
+        </div>
+      </div>
+      <textarea id="export-products-txt" class="export-textarea" readonly></textarea>
+    </div>
+    <div class="export-json-block" style="margin-top:16px">
+      <div class="export-json-header">
+        <span>⚙️ data/config.json</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn-copy-json" onclick="copyExport('config')">Copiar</button>
+          <button class="btn-copy-json" onclick="downloadExport('config')">⬇ Descargar</button>
+        </div>
+      </div>
+      <textarea id="export-config-txt" class="export-textarea" readonly></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen" class="overlay">
+  <div class="login-box">
+    <div class="login-logo" id="login-brand">Chikarella</div>
+    <div class="login-sub">Panel de Administración</div>
+    <div class="login-err hidden" id="lerr">Usuario o contraseña incorrectos</div>
+    <div class="fg"><label class="flbl">Usuario</label><input class="fi" type="text" id="lu" placeholder="admin" autocomplete="username"></div>
+    <div class="fg"><label class="flbl">Contraseña</label><input class="fi" type="password" id="lp" placeholder="••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn-s" style="width:100%;margin-top:8px" onclick="doLogin()">Ingresar</button>
+    <button onclick="closeLogin()" class="btn-cancel-login">Cancelar</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

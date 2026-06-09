@@ -1,0 +1,21 @@
+{
+  "brand": "Chikarella",
+  "tagline": "Moda Femenina Premium",
+  "wa": "51999999999",
+  "phone": "+51 999 999 999",
+  "email": "chikarella@gmail.com",
+  "maypass": "mayor2025",
+  "adminUser": "admin",
+  "adminPass": "chikarella2025",
+  "tiktok": "https://tiktok.com/@chikarella",
+  "instagram": "https://instagram.com/chikarella",
+  "facebook": "https://facebook.com/chikarella",
+  "store1": "Jirón Gamarra 1159, Galería Augusto Allca, Tienda 172",
+  "store2": "Damero, Sótano 2, Tienda 009",
+  "banner": {
+    "eyebrow": "Nueva Colección 2025",
+    "title": "La moda que te hace brillar",
+    "sub": "Prendas exclusivas para la mujer moderna. Calidad premium directo desde Gamarra, Lima.",
+    "heroImages": ["assets/images/product_01.jpg","assets/images/product_03.jpg","assets/images/product_07.jpg","assets/images/product_09.jpg"]
+  }
+}
